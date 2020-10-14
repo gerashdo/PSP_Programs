@@ -1,0 +1,35 @@
+\documentclass[11pt]{article}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+\begin{center}
+\textbf{\large Reporte PSP0}\\
+\end{center}
+
+\textbf{Proceso de Resolución:} Cuando se me han presentados problemas para el desarrollo de software o en general, parto por leer los datos que se me puedan dar que describan el problema. Al estar leyendo mi mente comienza a trabajar al mismo tiempo en pensar soluciones o imaginar el problema en si de manera mas gráfica y no solo en palabras. 
+Al terminar de leer o de escuchar, tomo una hoja de papel y comienzo a dibujar o escribir palabras que recuerde que imagine o pensé anteriormente, además de pensar en otras mas plasmando todo en la hoja. Al final le doy una checada completa para rescatar las que me parecen mas viables.
+
+Cuando tengo una lista de mis opciones comienzo a pensar en el proceso de desarrollo de cada una rápidamente para no tardarme mucho, a partir de eso tomo una sola que me haya parecido la mejor. Desarrollo los pasos secuenciales que creo ayudan a resolver el problema y continuo a ponerlo en practica.
+Al terminar el desarrollo lo pruebo con casos que se que tal vez lo pueda hacer fallar, si hay errores corrijo y si no lo tomo como terminado.
+
+\textbf{Cuanto tiempo va a tomar:} Realmente nunca me había preocupado por medir el tiempo que me toma cada desarrollo de soluciones.
+
+\textbf{Calidad:} En este momento puedo decir que dejan mucho que desear, se que tienen fallas y aun así las tomo como terminadas.
+
+\textbf{Métodos para asegurar calidad:}Métodos para asegurar calidad: Lo único que hago es probar con posibles casos de error, además de pedir a otra persona que también lo pruebe.
+
+\textbf{Medidas:} Ninguna, tristemente.
+
+
+\section{Sistema de estatus de enfermo por Covid-19}
+
+El precio lo calcularía de acuerdo al alcance que podría tener y el tiempo. En base a esto y a que no se como calcular el tiempo la verdad estaría de unos 20,000 pesos mas o menos, repito que sinceramente no sabría cuanto cobrar.
+
+\section{Conclusión}
+
+Conclusiones: Al ponerse a reflexionar en las preguntas me puedo dar cuenta que me falta el conocimiento necesario para medir esfuerzo y tiempo y en base a ello poderle dar un valor cuantitativo y cualitativo al mi trabajo. 
+
+
+\end{document}
