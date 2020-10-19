@@ -342,7 +342,7 @@ public class ContarLineasCodigo {
 	public static boolean esComentario (String[] linea) {
 		boolean cuenta;
 		cuenta = true;
-		if( !linea[0].equalsIgnoreCase("/**") && !linea[0].equalsIgnoreCase("/*") && !linea[0].equalsIgnoreCase("*/") && !linea[0].equalsIgnoreCase("//") ){
+		if( !linea[0].equalsIgnoreCase("/**") && !linea[0].equalsIgnoreCase("/*") && !linea[0].equalsIgnoreCase("*/") && !linea[0].equalsIgnoreCase("//") && !(linea[0].equalsIgnoreCase("") && linea.length == 1) ){
 			cuenta = false;
 		}
 		return cuenta;
