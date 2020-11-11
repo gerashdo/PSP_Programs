@@ -51,6 +51,7 @@ public class ContarLineasCodigo {
 			System.out.println("Clase: " + nombresClases[contador]);
 			System.out.println("Numero de Metodos: " + metodosClases[contador]);
 			System.out.println("Lineas Clase: " + lineasClases[contador]);
+			System.out.println("----------------------------------------------------");
 			contador++;
 		}
 		System.out.println("");

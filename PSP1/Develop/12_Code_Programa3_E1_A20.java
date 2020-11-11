@@ -20,9 +20,12 @@ public class Main {
 		conjunto1 = OperacionesArchivo.extraerArreglo(contenidoArchivo,1);
 		conjunto2 = OperacionesArchivo.extraerArreglo(contenidoArchivo,2);
 		double correlacion;
+		double coeficiente;
 		correlacion = Estadistica.correlacion(conjunto1,conjunto2);
 		if( correlacion >= -1 && correlacion <= 1) {
+			coeficiente = Estadistica.coeficienteDeterminacion(correlacion);
 			System.out.println("La correlacion es: " + correlacion);
+			System.out.println("El coeficiente es: " + coeficiente);
 		}else{
 			System.out.println("Error en los datos.");
 		}
@@ -49,6 +52,16 @@ class Estadistica {
 			correlacion = arriba / Math.sqrt(izquierda * derecha);
 		}
 		return correlacion;
+	}
+
+	public static double coeficienteDeterminacion (double correlacion) {
+		return Math.pow(correlacion,2);
+	}
+
+	public static double coeficienteDeterminacion (Object[] conjunto1, Object[] conjunto2) {
+		double correlacion;
+		correlacion = correlacion(conjunto1,conjunto2);
+		return Math.pow(correlacion,2);
 	}
 }
 
