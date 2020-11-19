@@ -124,6 +124,7 @@ public class ContarLineasCodigo {
 			linea = contenidoArchivo[line];
 			linea = eliminarTabuladores(linea);
 			arregloLinea = linea.split(" ");
+			// System.out.println(linea);
 			if( !esComentario(arregloLinea) ){
 				if( esClase(arregloLinea) ){
 					nombresClases[contadorClases] = recuperarNombreClase(arregloLinea);
