@@ -11,26 +11,27 @@ public class Main {
 	public static void main (String[] args) {
 		ListaLigada contenido;
 		String nombreArchivo;
-		double locAñadida;
+		double locAnadida;
 		double locReutilizada;
 		double locModificado;
 		double tiempo;
 		System.out.println("Introduce el Nombre del Archivo:");
 		nombreArchivo = InteraccionUsuario.pedirUsuario().toString();
-		System.out.println("Lineas a Añadir:");
-		locAñadida = Double.parseDouble(InteraccionUsuario.pedirUsuario().toString());
+		System.out.println("Lineas nuevas:");
+		locAnadida = Double.parseDouble(InteraccionUsuario.pedirUsuario().toString());
 		System.out.println("Lineas a Reutilizar:");
 		locReutilizada = Double.parseDouble(InteraccionUsuario.pedirUsuario().toString());
 		System.out.println("Lineas a Modificar:");
 		locModificado = Double.parseDouble(InteraccionUsuario.pedirUsuario().toString());
+		contenido = LeerArchivo.leerArchivo(nombreArchivo);
 		Ecuacion paraEcuaciones;
 		paraEcuaciones = new Ecuacion(contenido,contenido.getPosicion());
 		paraEcuaciones.crearMatriz();
 		paraEcuaciones.gauss();
 		paraEcuaciones.sustitucionHaciaAtras();
-		tiempo = obtenerNuevaVariable(locAñadida,locReutilizada,locModificado);
+		tiempo = paraEcuaciones.obtenerNuevaVariable(locAnadida,locReutilizada,locModificado);
 		double betas[];
-		betas = getBetas();
+		betas = paraEcuaciones.getBetas();
 		System.out.println("B0 = "+betas[0]);
 		System.out.println("B1 = "+betas[1]);
 		System.out.println("B2 = "+betas[2]);
@@ -44,7 +45,7 @@ class Ecuacion {
 	private double betas[];
 	private ListaLigada contenido;
 	private int n;
-	public ecuacion (ListaLigada contenido, int n) {
+	public Ecuacion (ListaLigada contenido, int n) {
 		matriz = new Matriz(4,5);
 		betas = new double[4];
 		this.contenido = contenido;
@@ -57,7 +58,7 @@ class Ecuacion {
 		// Se puede hacer más generalizable
 		double suma;
 		suma = betas[0];
-		suma = suma + (beta[1] * val1) + (beta[2] * val2) + (beta[3] * val3);
+		suma = suma + (betas[1] * val1) + (betas[2] * val2) + (betas[3] * val3);
 		return suma;
 	}
 	public void sustitucionHaciaAtras () {
@@ -80,7 +81,7 @@ class Ecuacion {
 		columna = 0;
 		int iteracion;
 		// Comienzan iteraciones
-		for( iteracion = 0;iteracion < matriz.renglones()-1;iteracion++ ){
+		for( iteracion = 0;iteracion < matriz.renglones();iteracion++ ){
 			// Si hay una posicion más en los renglones
 			// if( (columna + 1) < matriz.columnas){
 				int posPivote;
@@ -88,6 +89,7 @@ class Ecuacion {
 				// Si la columna no esta ya en 0
 				if( Double.parseDouble(matriz.getElemento(posPivote,columna).toString()) != 0.0){
 					intercambiarPosiciones(columna,posPivote,columna);
+					System.out.println("Privote = "+matriz.getElemento(columna,columna));
 					reducirCoeficiente(columna);
 					double vectorActual[];
 					vectorActual = new double[matriz.columnas()-columna];
@@ -98,7 +100,7 @@ class Ecuacion {
 					for( col = columna;col < matriz.columnas()-col;col++ ){
 						// Valor del vector ya es double
 						vectorActual[vecPos] = Double.parseDouble(matriz.getElemento(columna,col).toString());
-						vacPos++;
+						vecPos++;
 					}
 					// Eliminar a cada renglon el vector
 					int reng;
@@ -107,13 +109,19 @@ class Ecuacion {
 					}
 				}
 				columna++;//////////////////////////////////////////////////////////////////////////////////////////
+			System.out.println();
+			matriz.imprimir();
 			// }
 		}
 	}
 
 	public void eliminarEnRenglones (double[] vectorInicial,int renglon, int columna) {
 		double vectorEliminar[];
-		vectorEliminar = vectorInicial;
+		vectorEliminar = new double[vectorInicial.length];
+		int pos2;
+		for( pos2 = 0;pos2 < vectorInicial.length;pos2++){
+			vectorEliminar[pos2] = vectorInicial[pos2];
+		}
 		int col;
 		int pos;
 		double valorEliminar = Double.parseDouble(matriz.getElemento(renglon,columna).toString()) * -1.0;
@@ -132,9 +140,11 @@ class Ecuacion {
 	public void reducirCoeficiente (int reng) {
 		int col;
 		double valorAnterior;
+		double valorActual;
+		valorAnterior =  Double.parseDouble(matriz.getElemento(reng,reng).toString());
 		for( col = reng;col < matriz.columnas();col++){
-			valorAnterior =  Double.parseDouble(matriz.getElemento(reng,col).toString());
-			matriz.setElemento(reng,col,(1/valorAnterior)*valorAnterior);
+			valorActual =  Double.parseDouble(matriz.getElemento(reng,col).toString());
+			matriz.setElemento(reng,col,(1/valorAnterior)*valorActual);
 		}
 	}
 
@@ -158,9 +168,9 @@ class Ecuacion {
 		int pos;
 		pos = col;
 		int reng; 
-		for( reng = col;reng < matriz.renglones();reng++){
-			if( Math.abs(Double.parseDouble(matriz.getElemento(reng,col).toString()) > Math.abs(valorMax)){
-				valorMax = Double.parseDouble(matriz.getElemento().toString());
+		for( reng = col;reng < matriz.renglones();reng++ ){
+			if( Math.abs(Double.parseDouble(matriz.getElemento(reng,col).toString())) > Math.abs(valorMax)){
+				valorMax = Double.parseDouble(matriz.getElemento(reng,col).toString());
 				pos = reng;
 			}
 		}
@@ -178,12 +188,12 @@ class Ecuacion {
 
 	public void crearMatriz () {
 		//PRIMER LINEA
-		matrizLinea1(contenido);
+		matriz.inicializar(0.0);
+		matrizLinea1();
 		int letra;
 		letra = 0;
 		int reng;
 		int col;
-		matriz.inicializar();
 		// revisar
 		for( reng = 1;reng < 4;reng++ ){
 			matriz.setElemento(reng,0,OperacionesConjuntos.sumatoriaConjunto(contenido,letra));
@@ -192,7 +202,7 @@ class Ecuacion {
 			}
 			letra++;
 		}
-
+		matriz.imprimir();
 	}
 }
 
@@ -310,9 +320,9 @@ class Matriz {
         int columnas;
         for( renglones = 0;renglones < RENG;renglones++ ){
             for( columnas = 0;columnas < COL;columnas++ ){
-                SalidaEstandar.consola(datos[renglones][columnas]+ " ");
+                System.out.print(datos[renglones][columnas]+ " ");
             }
-            SalidaEstandar.consola("\n");
+            System.out.print("\n");
         }
            
     }
@@ -356,7 +366,7 @@ class Nodo {
 	}
 	@Override
 	public String toString () {
-		return info1.toString()+' '+info2.toString();
+		return info1.toString();
 	}
 }
 
