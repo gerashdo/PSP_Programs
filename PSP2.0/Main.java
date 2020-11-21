@@ -119,7 +119,8 @@ class Ecuacion {
 		}
 		int col;
 		int pos;
-		double valorEliminar = Double.parseDouble(matriz.getElemento(renglon,columna).toString()) * -1.0;
+		double valorEliminar;
+		valorEliminar = Double.parseDouble(matriz.getElemento(renglon,columna).toString()) * -1.0;
 		// Multiplicar el valor al contrario con el vector original
 		for( pos = 0;pos < vectorEliminar.length;pos++ ){
 			vectorEliminar[pos] = vectorEliminar[pos] * valorEliminar;
@@ -234,59 +235,58 @@ class OperacionesConjuntos {
 }
 
 class Matriz {
-    protected Object datos[][];
-    protected int RENG;
-    protected int COL;
+	protected Object datos[][];
+	protected int RENG;
+	protected int COL;
 
-    public Matriz (int reng, int col) {
-        RENG = reng;
-        COL = col;
-        datos = new Object[reng][col];
-    }
+	public Matriz (int reng, int col) {
+		RENG = reng;
+		COL = col;
+		datos = new Object[reng][col];
+	}
 
-    public void inicializar (Object valor) {
-    	int reng;
-    	int col;
-        for(reng = 0;reng<RENG;reng++){
-            for(col = 0;col<COL;col++){
-                datos[reng][col]=valor;
-                    
-            }
-        }
-    }
+	public void inicializar (Object valor) {
+		int reng;
+		int col;
+		for(reng = 0;reng<RENG;reng++){
+			for(col = 0;col<COL;col++){
+				datos[reng][col]=valor;   
+			}
+		}
+	}
 
-    private boolean validarDim (int valor, int tam) {
-        if(valor >= 0 && valor < tam){
-            return true;
-        }else{
-            return false;
-        }
-    }
+	private boolean validarDim (int valor, int tam) {
+		if(valor >= 0 && valor < tam){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
-    public boolean setElemento (int reng, int col, Object valor) {
-        if(validarDim(reng,RENG) && validarDim(col, COL)){
-            datos[reng][col] = valor;
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    public Object getElemento (int reng, int col) {
-        if(validarDim(reng,RENG) && validarDim(col, COL)){
-            return datos[reng][col];
-        }else{
-            return null;
-        }
-    }
-    
-    public int renglones () {
-        return RENG;
-    }
-    
-    public int columnas () {
-        return COL;
-    }
+	public boolean setElemento (int reng, int col, Object valor) {
+		if(validarDim(reng,RENG) && validarDim(col, COL)){
+			datos[reng][col] = valor;
+			 return true;
+		}else{
+			return false;
+		}
+	}
+
+	public Object getElemento (int reng, int col) {
+		if(validarDim(reng,RENG) && validarDim(col, COL)){
+			return datos[reng][col];
+		}else{
+			return null;
+		}
+	}
+
+	public int renglones () {
+		return RENG;
+	}
+
+	public int columnas () {
+		return COL;
+	}
 }
 
 class InteraccionUsuario {
