@@ -7,7 +7,7 @@ import static java.lang.Math.abs;
 /* Fecha: 24 Noviembre, 2020.
 /* Descripcion: Calcula la Prediccion Mejorada entre 4 conjuntos.
 */
-public class Main {
+public class Main2 {
 	public static void main (String[] args) {
 		ListaLigada contenido;
 		String nombreArchivo;
@@ -84,12 +84,12 @@ class Ecuacion {
 		for( iteracion = 0;iteracion < matriz.renglones();iteracion++ ){
 			// Si hay una posicion más en los renglones
 			// if( (columna + 1) < matriz.columnas){
-				int posPivote;
-				posPivote = encontrarPivote(columna);
+				// int posPivote;
+				// posPivote = encontrarPivote(columna);
 				// Si la columna no esta ya en 0
-				if( Double.parseDouble(matriz.getElemento(posPivote,columna).toString()) != 0.0){
-					intercambiarPosiciones(columna,posPivote,columna);
-					// System.out.println("Privote = "+matriz.getElemento(columna,columna));
+				//if( Double.parseDouble(matriz.getElemento(posPivote,columna).toString()) != 0.0){
+					//intercambiarPosiciones(columna,posPivote,columna);
+					//System.out.println("Privote = "+matriz.getElemento(columna,columna));
 					reducirCoeficiente(columna);
 					double vectorActual[];
 					vectorActual = new double[matriz.columnas()-columna];
@@ -97,7 +97,7 @@ class Ecuacion {
 					int vecPos;
 					vecPos = 0;
 					// crear vector con valres de la columna actual
-					for( col = columna;col < matriz.columnas();col++ ){
+					for( col = columna;col < matriz.columnas()-col;col++ ){
 						// Valor del vector ya es double
 						vectorActual[vecPos] = Double.parseDouble(matriz.getElemento(columna,col).toString());
 						vecPos++;
@@ -107,38 +107,33 @@ class Ecuacion {
 					for(reng = columna + 1;reng < matriz.renglones();reng++){
 						eliminarEnRenglones(vectorActual,reng,columna);
 					}
-				}
+				//}
 				columna++;//////////////////////////////////////////////////////////////////////////////////////////
-			// System.out.println();
-			// matriz.imprimir();
+			System.out.println();
+			matriz.imprimir();
 			// }
 		}
 	}
 
 	public void eliminarEnRenglones (double[] vectorInicial,int renglon, int columna) {
-		double vectorEliminar[];
-		vectorEliminar = new double[vectorInicial.length];
-		int pos2;
-		for( pos2 = 0;pos2 < vectorInicial.length;pos2++){
-			//System.out.println(pos2);
-			vectorEliminar[pos2] = vectorInicial[pos2];
-			// System.out.print(vectorEliminar[pos2]+" ");
-		}
-		// System.out.println();
-		// System.out.println();
+		// double vectorEliminar[];
+		// vectorEliminar = new double[vectorInicial.length];
+		// int pos2;
+		// for( pos2 = 0;pos2 < vectorInicial.length;pos2++){
+			// System.out.println(pos2);
+			// vectorEliminar[pos2] = vectorInicial[pos2];
+		// }
 		int col;
 		int pos;
 		double valorEliminar = Double.parseDouble(matriz.getElemento(renglon,columna).toString()) * -1.0;
 		// Multiplicar el valor al contrario con el vector original
-		for( pos = 0;pos < vectorEliminar.length;pos++ ){
-			vectorEliminar[pos] = vectorEliminar[pos] * valorEliminar;
-			
-		}
-		
+		// for( pos = 0;pos < vectorEliminar.length;pos++ ){
+			// vectorEliminar[pos] = vectorEliminar[pos] * valorEliminar;
+		// }
 		// Sumar valores del vector al renglón actual
 		pos = 0;
 		for( col = columna;col < matriz.columnas();col++){
-			matriz.setElemento(renglon,col,Double.parseDouble(matriz.getElemento(renglon,col).toString())+vectorEliminar[pos]);
+			matriz.setElemento(renglon,col,Double.parseDouble(matriz.getElemento(renglon,col).toString())+ (valorEliminar * vectorInicial[pos]));
 			pos++;
 		}
 	}
@@ -149,8 +144,9 @@ class Ecuacion {
 		double valorActual;
 		valorAnterior =  Double.parseDouble(matriz.getElemento(reng,reng).toString());
 		for( col = reng;col < matriz.columnas();col++){
+			System.out.println("Valor Anterior = "+valorAnterior);
 			valorActual =  Double.parseDouble(matriz.getElemento(reng,col).toString());
-			matriz.setElemento(reng,col,(1/valorAnterior)*valorActual);
+			matriz.setElemento(reng,col,valorActual/valorAnterior);
 		}
 	}
 
@@ -208,7 +204,7 @@ class Ecuacion {
 			}
 			letra++;
 		}
-		// matriz.imprimir();
+		matriz.imprimir();
 	}
 }
 
