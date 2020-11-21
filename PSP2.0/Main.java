@@ -65,7 +65,6 @@ class Ecuacion {
 		int limite;
 		int col;
 		double valorResultado;
-
 		// iteraciones
 		for( limite = matriz.columnas()-2;limite >= 0;limite--) {
 			valorResultado = Double.parseDouble(matriz.getElemento(limite,matriz.columnas()-1).toString());
@@ -83,7 +82,6 @@ class Ecuacion {
 		// Comienzan iteraciones
 		for( iteracion = 0;iteracion < matriz.renglones();iteracion++ ){
 			// Si hay una posicion más en los renglones
-			// if( (columna + 1) < matriz.columnas){
 				int posPivote;
 				posPivote = encontrarPivote(columna);
 				// Si la columna no esta ya en 0
@@ -108,10 +106,7 @@ class Ecuacion {
 						eliminarEnRenglones(vectorActual,reng,columna);
 					}
 				}
-				columna++;//////////////////////////////////////////////////////////////////////////////////////////
-			// System.out.println();
-			// matriz.imprimir();
-			// }
+				columna++;
 		}
 	}
 
@@ -120,12 +115,8 @@ class Ecuacion {
 		vectorEliminar = new double[vectorInicial.length];
 		int pos2;
 		for( pos2 = 0;pos2 < vectorInicial.length;pos2++){
-			//System.out.println(pos2);
 			vectorEliminar[pos2] = vectorInicial[pos2];
-			// System.out.print(vectorEliminar[pos2]+" ");
 		}
-		// System.out.println();
-		// System.out.println();
 		int col;
 		int pos;
 		double valorEliminar = Double.parseDouble(matriz.getElemento(renglon,columna).toString()) * -1.0;
@@ -134,7 +125,6 @@ class Ecuacion {
 			vectorEliminar[pos] = vectorEliminar[pos] * valorEliminar;
 			
 		}
-		
 		// Sumar valores del vector al renglón actual
 		pos = 0;
 		for( col = columna;col < matriz.columnas();col++){
@@ -193,14 +183,12 @@ class Ecuacion {
 	}
 
 	public void crearMatriz () {
-		//PRIMER LINEA
 		matriz.inicializar(0.0);
 		matrizLinea1();
 		int letra;
 		letra = 0;
 		int reng;
 		int col;
-		// revisar
 		for( reng = 1;reng < 4;reng++ ){
 			matriz.setElemento(reng,0,OperacionesConjuntos.sumatoriaConjunto(contenido,letra));
 			for( col = 1;col <= 4;col++ ){
@@ -208,7 +196,6 @@ class Ecuacion {
 			}
 			letra++;
 		}
-		// matriz.imprimir();
 	}
 }
 
@@ -229,12 +216,6 @@ class OperacionesConjuntos {
 		return suma;
 	}
 
-	/**public static double promedio (ListaLigada lista, int posicion) {
-		double suma;
-		suma = sumatoriaConjunto(lista,posicion);
-		return suma/Double.parseDouble(((Integer)lista.getPosicion()).toString());
-	}**/
-
 	public static double sumatoriaConjunto (ListaLigada lista, int posicion) {
 		Nodo nodo;
 		double suma;
@@ -250,27 +231,6 @@ class OperacionesConjuntos {
 		}
 		return suma;
 	}
-
-	/**
-	public static double sumConjuntoCuadrado (ListaLigada lista, int posicion) {
-		double val;
-		Nodo nodo;
-		double suma;
-		suma = 0;
-		lista.inicializaIterador();
-		while(lista.existeNodo()){
-			nodo = (Nodo)lista.obtenerSiguiente();
-			if( posicion == 1 ){
-				val = Double.parseDouble(nodo.getInfo1().toString());
-			}else{
-				val = Double.parseDouble(nodo.getInfo2().toString());
-			}
-			val = Math.pow(val,2);
-			suma = suma + val;
-		}
-		return suma;
-	}
-	**/
 }
 
 class Matriz {
@@ -318,19 +278,6 @@ class Matriz {
         }else{
             return null;
         }
-    }
-    // QITAR
-    public void imprimir () {
-        // Sacar las rebanadas de jamon.
-        int renglones;
-        int columnas;
-        for( renglones = 0;renglones < RENG;renglones++ ){
-            for( columnas = 0;columnas < COL;columnas++ ){
-                System.out.print(datos[renglones][columnas]+ " ");
-            }
-            System.out.print("\n");
-        }
-           
     }
     
     public int renglones () {
